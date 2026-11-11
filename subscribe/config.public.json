@@ -72,8 +72,7 @@
       "list_only": true,
       "targets": {
         "clash": "daily-clash",
-        "singbox": "daily-singbox",
-        "v2ray": "daily-v2ray"
+        "singbox": "daily-singbox"
       }
     }
   },
@@ -87,10 +86,6 @@
       "daily-singbox": {
         "folder_id": "feeds",
         "file_id": "singbox.json"
-      },
-      "daily-v2ray": {
-        "folder_id": "feeds",
-        "file_id": "v2ray.txt"
       }
     }
   },

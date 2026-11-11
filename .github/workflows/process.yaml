@@ -37,17 +37,16 @@ jobs:
         run: |
           python -u subscribe/process.py --overwrite -n 24
           python - <<'PY'
-          import base64, json, re, sys, yaml
+          import json, yaml
           from pathlib import Path
           root = Path("feeds")
           clash = yaml.safe_load((root / "clash.yaml").read_text(encoding="utf-8")) or {}
           proxies = clash.get("proxies") or []
           singbox = json.loads((root / "singbox.json").read_text(encoding="utf-8"))
-          v2ray = base64.b64decode((root / "v2ray.txt").read_text(encoding="utf-8")).decode("utf-8", "replace")
-          links = re.findall(r"(?im)^(?:vless|vmess|trojan|ss|ssr|hysteria2|hysteria|tuic|anytls)://", v2ray)
-          if not proxies or not singbox.get("outbounds") or not links:
-              raise SystemExit(f"Feed validation failed: clash={len(proxies)}, singbox_outbounds={len(singbox.get('outbounds', []))}, v2ray_nodes={len(links)}")
-          print(f"Validated generated feeds: {len(proxies)} Clash nodes, {len(links)} V2Ray-compatible links.")
+          outbounds = singbox.get("outbounds") or []
+          if not proxies or not outbounds:
+              raise SystemExit(f"Feed validation failed: clash={len(proxies)}, singbox_outbounds={len(outbounds)}")
+          print(f"Validated generated feeds: {len(proxies)} Clash nodes, {len(outbounds)} Sing-box outbounds.")
           PY
       - name: Publish feed files
         env:
@@ -55,7 +54,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add feeds/clash.yaml feeds/singbox.json feeds/v2ray.txt
+          git add feeds/clash.yaml feeds/singbox.json
           if git diff --cached --quiet; then
             echo "Subscription files are unchanged."
             exit 0
