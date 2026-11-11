@@ -1,0 +1,98 @@
+{
+  "sites": [],
+  "crawl": {
+    "enable": true,
+    "exclude": "",
+    "max_fails": 2,
+    "include_nodes": true,
+    "task": {
+      "push_to": [
+        "daily"
+      ],
+      "check_alive": true,
+      "max_rate": 2.5
+    },
+    "pages": [
+      {
+        "enable": true,
+        "url": "https://raw.githubusercontent.com/chaishpish/free_server_v2ray/refs/heads/main/%40TFMTProto",
+        "include": "",
+        "exclude": "",
+        "push_to": [
+          "daily"
+        ],
+        "skip_cache": true
+      }
+    ],
+    "google": {
+      "enable": true,
+      "limit": 20,
+      "days": 3,
+      "push_to": [
+        "daily"
+      ]
+    },
+    "yandex": {
+      "enable": true,
+      "pages": 1,
+      "days": 3,
+      "push_to": [
+        "daily"
+      ]
+    },
+    "telegram": {
+      "enable": true,
+      "pages": 1,
+      "exclude": "donate|premium|vip|广告|付费",
+      "channels": {
+        "TFMTProto": {
+          "include": "",
+          "exclude": "donate|premium|vip|广告|付费",
+          "push_to": [
+            "daily"
+          ]
+        }
+      }
+    },
+    "github": {
+      "enable": false,
+      "pages": 1,
+      "push_to": []
+    },
+    "twitter": {
+      "enable": false,
+      "users": {}
+    },
+    "repositories": [],
+    "scripts": []
+  },
+  "groups": {
+    "daily": {
+      "emoji": true,
+      "list_only": true,
+      "targets": {
+        "clash": "daily-clash",
+        "singbox": "daily-singbox",
+        "v2ray": "daily-v2ray"
+      }
+    }
+  },
+  "storage": {
+    "engine": "local",
+    "items": {
+      "daily-clash": {
+        "folder_id": "feeds",
+        "file_id": "clash.yaml"
+      },
+      "daily-singbox": {
+        "folder_id": "feeds",
+        "file_id": "singbox.json"
+      },
+      "daily-v2ray": {
+        "folder_id": "feeds",
+        "file_id": "v2ray.txt"
+      }
+    }
+  },
+  "delay": 5000
+}
